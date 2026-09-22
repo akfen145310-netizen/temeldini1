@@ -1,0 +1,187 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Student or Teacher profile registered in Din Keşif Atölyesi",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Full name of the student or teacher"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Google account email"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["student", "teacher"],
+          "description": "User role"
+        },
+        "school": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "School name"
+        },
+        "className": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Class grade and section, e.g. 5-A"
+        },
+        "studentNumber": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Student school number"
+        },
+        "classCode": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Teacher classroom code"
+        },
+        "totalScore": {
+          "type": "number",
+          "description": "Total gamification score accumulated"
+        },
+        "totalStars": {
+          "type": "number",
+          "description": "Total stars accumulated"
+        },
+        "completedTopicsCount": {
+          "type": "number",
+          "description": "Count of finished topics"
+        },
+        "badges": {
+          "type": "array",
+          "description": "Badges earned by the student"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["userId", "name", "email", "role", "classCode"]
+    },
+    "Classroom": {
+      "title": "Classroom",
+      "description": "A classroom managed by a teacher with a unique join code",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Unique join code given to students"
+        },
+        "teacherId": {
+          "type": "string",
+          "description": "UID of the creating teacher"
+        },
+        "teacherName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Teacher full name"
+        },
+        "school": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "School name"
+        },
+        "className": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Class name, e.g. 5-A"
+        },
+        "studentCount": {
+          "type": "number",
+          "description": "Number of enrolled students"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["code", "teacherId", "teacherName", "className"]
+    },
+    "UserActivity": {
+      "title": "User Activity Result",
+      "description": "Student activity completion, mistakes tracking, scores, and remedy logs",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Composite key: userId_subTopicId"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Student Auth UID"
+        },
+        "classCode": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Student's classroom code"
+        },
+        "subTopicId": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "SubTopic ID e.g. 1.1"
+        },
+        "unitId": {
+          "type": "number",
+          "description": "Unit ID 1 to 4"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether the topic has been completed"
+        },
+        "score": {
+          "type": "number",
+          "description": "Points earned in this topic"
+        },
+        "stars": {
+          "type": "number",
+          "description": "Stars earned in this topic"
+        },
+        "mistakeQuestionIds": {
+          "type": "array",
+          "description": "IDs of questions answered incorrectly"
+        },
+        "remediedQuestionIds": {
+          "type": "array",
+          "description": "IDs of questions subsequently solved correctly via Eksiklerini Tamamla"
+        },
+        "completedAt": {
+          "type": "string",
+          "description": "Timestamp when finished"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["id", "userId", "subTopicId", "classCode"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile with student or teacher info, class code, and overall achievements"
+    },
+    "/classrooms/{classCode}": {
+      "schema": "Classroom",
+      "description": "Classroom registered by teacher with student count and school details"
+    },
+    "/userActivities/{activityDocId}": {
+      "schema": "UserActivity",
+      "description": "Individual student test and activity scores, mistakes, and remedy state"
+    }
+  }
+}

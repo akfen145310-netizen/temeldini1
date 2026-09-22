@@ -1,0 +1,6 @@
+{
+  "name": "5. Sınıf Din Keşif Atölyesi",
+  "description": "5. Sınıf Temel Dinî Bilgiler ders kitabı kazanımlarına uygun, doğayı ve evreni okuyan tefekkür ve hikaye odaklı interaktif öğrenme platformu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
