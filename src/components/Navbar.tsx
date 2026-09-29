@@ -11,10 +11,12 @@ import {
   RotateCcw,
   School,
   UserCheck,
-  LogIn
+  LogIn,
+  HardDrive
 } from 'lucide-react';
 import { sound } from '../utils/audio';
 import { UserProfile } from '../types';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface NavbarProps {
   score: number;
@@ -31,6 +33,7 @@ interface NavbarProps {
   onOpenRemedy: () => void;
   onOpenLeaderboard: () => void;
   onOpenTeacherDashboard: () => void;
+  onOpenOfflineUsb: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -48,6 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenRemedy,
   onOpenLeaderboard,
   onOpenTeacherDashboard,
+  onOpenOfflineUsb,
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
@@ -173,6 +177,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             <BookmarkCheck className="w-3.5 h-3.5 text-amber-600" />
             <span>Defterim</span>
           </button>
+
+          {/* Flash Bellek & Çevrimdışı Kiti */}
+          <button
+            onClick={() => {
+              sound.playClick();
+              onOpenOfflineUsb();
+            }}
+            id="nav-offline-usb-btn"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 shadow-2xs transition-all cursor-pointer"
+            title="Flash Bellekten Çalıştırma Kiti ve Çevrimdışı Yedekleme"
+          >
+            <HardDrive className="w-4 h-4 text-emerald-600" />
+            <span className="hidden xl:inline">Flash Bellek Kiti</span>
+            <span className="inline xl:hidden">Flash</span>
+          </button>
+
+          {/* PWA Install Button (Masaüstü/Tahta Kurulumu) */}
+          <PWAInstallButton />
 
           {/* User Profile / Google Sign-in Chip */}
           <button

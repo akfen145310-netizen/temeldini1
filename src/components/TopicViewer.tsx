@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SubTopic, Unit } from '../types';
+import { EnrichmentView } from './EnrichmentView';
 import {
   Sparkles,
   Compass,
@@ -52,7 +53,7 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
   onOpenRemedyModal,
   onSaveActivity,
 }) => {
-  const [activeTab, setActiveTab] = useState<'section1' | 'section2' | 'section3' | 'section4'>('section1');
+  const [activeTab, setActiveTab] = useState<'section1' | 'enrichment' | 'section2' | 'section3' | 'section4'>('section1');
   const [mistakeList, setMistakeList] = useState<string[]>([]);
 
   // Section 2: Revealed dialogues state
@@ -209,7 +210,7 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
           {topic.summary}
         </p>
 
-        {/* 4 Interactive Section Tabs */}
+        {/* 5 Interactive Section Tabs */}
         <div className="mt-6 border-t border-slate-100 pt-4 flex flex-wrap items-center gap-2 sm:gap-3">
           <button
             onClick={() => {
@@ -230,6 +231,22 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
           <button
             onClick={() => {
               sound.playClick();
+              setActiveTab('enrichment');
+            }}
+            id="tab-enrichment"
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              activeTab === 'enrichment'
+                ? 'bg-gradient-to-r from-teal-700 to-emerald-700 text-white shadow-md shadow-teal-700/25 scale-[1.02]'
+                : 'bg-teal-50 text-teal-900 hover:bg-teal-100/90 border border-teal-200/80'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-amber-300" />
+            <span>🌟 Zenginleştirin (Veli & Öğretmen)</span>
+          </button>
+
+          <button
+            onClick={() => {
+              sound.playClick();
               setActiveTab('section2');
             }}
             id="tab-section-2"
@@ -240,7 +257,7 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
             }`}
           >
             <MessageSquare className="w-4 h-4" />
-            <span>2. Meraklı Zihinler (3 Soru)</span>
+            <span>2. Meraklı Zihinler (10 Soru)</span>
           </button>
 
           <button
@@ -256,7 +273,7 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
             }`}
           >
             <Zap className="w-4 h-4" />
-            <span>3. Hızlı Düşün (D/Y)</span>
+            <span>3. Hızlı Düşün (10 Soru D/Y)</span>
           </button>
 
           <button
@@ -427,8 +444,46 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
             </div>
           </div>
 
+          {/* Veli & Öğretmen Zenginleştirme Banner'ı */}
+          <div className="bg-gradient-to-r from-teal-50 via-emerald-50 to-transparent p-5 rounded-3xl border border-teal-200/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-start sm:items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-teal-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                <Sparkles className="w-5 h-5 text-amber-300" />
+              </div>
+              <div>
+                <h4 className="text-sm font-extrabold text-teal-950">
+                  Daha Fazla İçerik, Temsili Hikâyeler ve Klasik Sınav Soruları
+                </h4>
+                <p className="text-xs text-slate-600 mt-0.5">
+                  Veli ve öğretmenler için Risale-i Nur mantığıyla temsilden hakikate anlatımlar, kavram tanımları ve sınav soruları Zenginleştirin bölümünde hazır!
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                sound.playClick();
+                setActiveTab('enrichment');
+              }}
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs shadow-xs transition-all shrink-0 cursor-pointer"
+            >
+              <span>Zenginleştirin Modülünü Aç</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
           {/* Next Tab Prompt */}
-          <div className="flex justify-end pt-2">
+          <div className="flex justify-between items-center pt-2">
+            <button
+              onClick={() => {
+                sound.playClick();
+                setActiveTab('enrichment');
+              }}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-teal-50 hover:bg-teal-100 text-teal-900 border border-teal-200/80 font-bold text-xs sm:text-sm transition-all cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4 text-teal-600" />
+              <span>Zenginleştirin (Veli & Öğretmen)</span>
+            </button>
+
             <button
               onClick={() => {
                 sound.playClick();
@@ -436,10 +491,29 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
               }}
               className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm shadow-md transition-all cursor-pointer"
             >
-              <span>Meraklı Zihinler Soru-Cevap Bölümüne Geç</span>
+              <span>2. Meraklı Zihinler (10 Soru) Bölümüne Geç</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+        </div>
+      )}
+
+      {/* 🌟 [BÖLÜM 1.5: ZENGİNLEŞTİRİN - Veli & Öğretmen Rehberi, Temsilden Hakikate, Tanımlar & Klasik Sınav] */}
+      {activeTab === 'enrichment' && (
+        <div className="space-y-6">
+          {topic.enrichment ? (
+            <EnrichmentView
+              topic={topic}
+              unit={unit}
+              enrichment={topic.enrichment}
+              onOpenNotebookWithPrompt={onOpenNotebookWithPrompt}
+              onBackToTopicExplanation={() => setActiveTab('section1')}
+            />
+          ) : (
+            <div className="bg-white p-8 rounded-3xl border border-slate-200 text-center text-slate-500">
+              Bu bölüm için zenginleştirme içeriği hazırlanıyor.
+            </div>
+          )}
         </div>
       )}
 
@@ -452,10 +526,10 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
             </div>
             <div>
               <h2 className="text-base font-bold text-sky-950">
-                Meraklı Zihinler: Öğrenci Soruyor, Bilge Rehber Açıklıyor
+                Meraklı Zihinler: Öğrenci Soruyor, Bilge Rehber Açıklıyor (10 Soru)
               </h2>
               <p className="text-xs sm:text-sm text-sky-800 mt-0.5">
-                Bir 5. sınıf öğrencisinin aklına gelebilecek en samimi sorular ve tefekkür dolu tatmin edici yanıtlar. Sorulara tıklayarak cevabı açabilirsin!
+                Bir 6. sınıf öğrencisinin aklına gelebilecek en samimi 10 soru ve tefekkür dolu tatmin edici yanıtlar. Sorulara tıklayarak cevabı açabilirsin!
               </p>
             </div>
           </div>
@@ -572,10 +646,10 @@ export const TopicViewer: React.FC<TopicViewerProps> = ({
             </div>
             <div>
               <h2 className="text-base font-bold text-amber-950">
-                Hızlı Düşün: Doğru mu, Yanlış mı?
+                Hızlı Düşün: Doğru mu, Yanlış mı? (10 Soru)
               </h2>
               <p className="text-xs sm:text-sm text-amber-800 mt-0.5">
-                Aşağıdaki 5 can alıcı önermeyi oku ve kararını ver! Doğru bildiğin her soru için +10 Puan ve yıldız kazanırsın.
+                Aşağıdaki 10 can alıcı önermeyi oku ve kararını ver! Doğru bildiğin her soru için +10 Puan ve yıldız kazanırsın.
               </p>
             </div>
           </div>

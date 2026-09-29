@@ -99,6 +99,10 @@ class SoundPlayer {
     }
   }
 
+  playSuccess() {
+    this.playCorrect();
+  }
+
   playFanfare() {
     if (!this.enabled) return;
     try {

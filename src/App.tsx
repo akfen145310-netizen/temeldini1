@@ -10,6 +10,8 @@ import { AuthModal } from './components/AuthModal';
 import { RemedyModal } from './components/RemedyModal';
 import { ClassroomLeaderboardModal } from './components/ClassroomLeaderboardModal';
 import { TeacherDashboardModal } from './components/TeacherDashboardModal';
+import { OfflineUsbModal } from './components/OfflineUsbModal';
+import { OfflineIndicator } from './components/OfflineIndicator';
 import { sound } from './utils/audio';
 import { UserProfile, UserActivityRecord } from './types';
 import { auth, db, handleFirestoreError, OperationType } from './services/firebase';
@@ -64,6 +66,7 @@ export default function App() {
   const [isGlossaryOpen, setIsGlossaryOpen] = useState<boolean>(false);
   const [isEsmaOpen, setIsEsmaOpen] = useState<boolean>(false);
   const [isNotebookOpen, setIsNotebookOpen] = useState<boolean>(false);
+  const [isOfflineUsbOpen, setIsOfflineUsbOpen] = useState<boolean>(false);
   const [notebookPrompt, setNotebookPrompt] = useState<string>('');
 
   // Unlocked badge toast notification
@@ -382,6 +385,7 @@ export default function App() {
         onOpenRemedy={() => setIsRemedyOpen(true)}
         onOpenLeaderboard={() => setIsLeaderboardOpen(true)}
         onOpenTeacherDashboard={() => setIsTeacherDashboardOpen(true)}
+        onOpenOfflineUsb={() => setIsOfflineUsbOpen(true)}
       />
 
       {/* Mobile Subheader to toggle units drawer */}
@@ -488,6 +492,19 @@ export default function App() {
         onClose={() => setIsNotebookOpen(false)}
         initialPrompt={notebookPrompt}
       />
+
+      <OfflineUsbModal
+        isOpen={isOfflineUsbOpen}
+        onClose={() => setIsOfflineUsbOpen(false)}
+        onRestoreData={(data) => {
+          if (data.score !== undefined) setScore(data.score);
+          if (data.totalStars !== undefined) setTotalStars(data.totalStars);
+          if (data.completedTopics) setCompletedSubTopicIds(data.completedTopics);
+          if (data.activities) setActivities(data.activities);
+        }}
+      />
+
+      <OfflineIndicator />
     </div>
   );
 }

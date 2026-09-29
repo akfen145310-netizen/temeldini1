@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="50%" stop-color="#0d9488" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded squircle -->
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)" />
+
+  <!-- Subtle geometric star / mihrab background -->
+  <g opacity="0.12" fill="none" stroke="#ffffff" stroke-width="4">
+    <circle cx="256" cy="256" r="210" />
+    <circle cx="256" cy="256" r="170" stroke-dasharray="8 8" />
+    <rect x="128" y="128" width="256" height="256" rx="30" transform="rotate(45 256 256)" />
+  </g>
+
+  <!-- Open Book & Light Icon -->
+  <g filter="url(#shadow)">
+    <!-- Book Pages Backing -->
+    <path d="M120 340 C180 320 230 330 256 350 C282 330 332 320 392 340 L392 200 C332 180 282 190 256 210 C230 190 180 180 120 200 Z" fill="#ffffff" />
+    <!-- Book Spine & Details -->
+    <path d="M256 210 L256 350" stroke="#0d9488" stroke-width="6" stroke-linecap="round" />
+    <path d="M140 230 C185 215 220 220 240 232" fill="none" stroke="#99f6e4" stroke-width="4" stroke-linecap="round" />
+    <path d="M140 260 C185 245 220 250 240 262" fill="none" stroke="#99f6e4" stroke-width="4" stroke-linecap="round" />
+    <path d="M140 290 C185 275 220 280 240 292" fill="none" stroke="#99f6e4" stroke-width="4" stroke-linecap="round" />
+
+    <path d="M372 230 C327 215 292 220 272 232" fill="none" stroke="#99f6e4" stroke-width="4" stroke-linecap="round" />
+    <path d="M372 260 C327 245 292 250 272 262" fill="none" stroke="#99f6e4" stroke-width="4" stroke-linecap="round" />
+    <path d="M372 290 C327 275 292 280 272 292" fill="none" stroke="#99f6e4" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Radiant Star / Noor on top of the book -->
+    <g transform="translate(256, 145)">
+      <!-- 8-pointed Islamic Star -->
+      <polygon points="0,-38 10,-12 38,0 10,12 0,38 -10,12 -38,0 -10,-12" fill="url(#goldGrad)" />
+      <polygon points="0,-38 10,-12 38,0 10,12 0,38 -10,12 -38,0 -10,-12" fill="url(#goldGrad)" transform="rotate(45)" opacity="0.85" />
+      <circle cx="0" cy="0" r="9" fill="#ffffff" />
+    </g>
+  </g>
+
+  <!-- Title Badge Label -->
+  <text x="256" y="420" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#ffffff" letter-spacing="1">DİN KEŞİF ATÖLYESİ</text>
+  <text x="256" y="445" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="15" fill="#a7f3d0" letter-spacing="3">5. SINIF MEB MÜFREDATI</text>
+</svg>

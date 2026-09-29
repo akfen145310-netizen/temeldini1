@@ -53,6 +53,50 @@ export interface HadithItem {
   text: string;
 }
 
+export interface EnrichmentStory {
+  parableTitle: string; // Temsili Hikaye / Analoji Başlığı
+  parableStory: string; // Risale-i Nur mantığıyla kurgulanmış temsili hikaye
+  transitionToTruth: string; // Temsilden Hakikate Geçiş
+  tefekkurSteps: string[]; // Tefekkür basamakları
+  quranSunnahConnection: string; // Ayet & Sünnet nuru
+}
+
+export interface EducatorParentGuide {
+  pedagogicalNote: string; // Veli & Öğretmene Pedagojik Yaklaşım Tavsiyesi
+  homeAndClassroomActivities: string[]; // Evde ve sınıfta canlandırma / uygulama etkinlikleri
+  dialogueStarters: string[]; // Çocuğa/öğrenciye yöneltilebilecek derin sohbet başlatıcı sorular
+  dailyLifeAnalogy: string; // Günlük hayattan modern analoji (teknoloji/doğa/bilim)
+}
+
+export interface DefinitionItem {
+  term: string;
+  definition: string;
+  example: string;
+}
+
+export interface TopicGlossarySummary {
+  summaryText: string; // Yapılandırılmış ve akıcı konu özeti
+  definitions: DefinitionItem[]; // Tanımlar ve somut örnekler
+}
+
+export interface ClassicExamQuestion {
+  id: string;
+  questionNumber: number;
+  questionText: string; // Klasik sınavda çıkabilecek soru
+  sampleAnswer: string; // Tam puanlık örnek cevap
+  scoringCriteria: string; // Puanlama kriteri & anahtar kavramlar
+  pointValue: number; // Soru puanı (örn: 10 veya 20 puan)
+}
+
+export interface EnrichmentSection {
+  title: string;
+  subtitle: string;
+  risaleStyleNarrative: EnrichmentStory;
+  educatorGuide: EducatorParentGuide;
+  conceptSummary: TopicGlossarySummary;
+  classicExamQuestions: ClassicExamQuestion[];
+}
+
 export interface SubTopic {
   id: string; // e.g. "1.1"
   unitId: number;
@@ -72,12 +116,15 @@ export interface SubTopic {
     reflectiveQuestions: string[];
   };
 
-  // Bölüm 2: Meraklı Zihinler - Etkileşimli Soru Cevap (3 adet)
+  // Yeni: Zenginleştirin - Veli & Öğretmen Rehberi, Temsilden Hakikate, Tanımlar & Klasik Sınav Soruları
+  enrichment?: EnrichmentSection;
+
+  // Bölüm 2: Meraklı Zihinler - Etkileşimli Soru Cevap (10 soru)
   section2: {
     dialogues: DialogueItem[];
   };
 
-  // Bölüm 3: Hızlı Düşün - Doğru mu Yanlış mı? (5 adet)
+  // Bölüm 3: Hızlı Düşün - Doğru mu Yanlış mı? (10 soru)
   section3: {
     questions: TrueFalseQuestion[];
   };
